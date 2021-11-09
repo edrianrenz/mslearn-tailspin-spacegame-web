@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "SpaceGame-ARM-Template",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2020-12-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "capacity": 1
+        },
+        "tags": {
+            "displayName": "SpaceGame-ARM-Template"
+        },
+        "properties": {
+            "name": "SpaceGame-ARM-Template"
+        }
+        },
+        {
+            "name": "SpaceGaem-ARM0414x44",
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2020-12-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/SpaceGame-ARM-Template')]": "Resource",
+                "displayName": "SpaceGaem-ARM0414x44"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', 'SpaceGame-ARM-Template')]"
+            ],
+            "properties": {
+                "name": "SpaceGaem-ARM0414x44",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'SpaceGame-ARM-Template')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
